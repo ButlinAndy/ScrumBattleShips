@@ -26,6 +26,10 @@ Run battleship
 ```bash
 node index.js
 ```
+or
+```bash
+npm start
+```
 
 ## Execute tests
 
