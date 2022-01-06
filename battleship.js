@@ -45,6 +45,7 @@ class Battleship {
             console.log("Player, it's your turn");
             console.log("Enter coordinates for your shot :");
             var position = Battleship.ParsePosition(readline.question());
+
             var validInput = gameController.VerifyPosition(position)
             if(!validInput) {
                 do {
@@ -54,16 +55,26 @@ class Battleship {
                 }
                 while(!validInput)
             }
+            
             var isHit = gameController.CheckIsHit(this.enemyFleet, position);
             if (isHit) {
+                var enemyShipHit = gameController.MarkIsHit(this.enemyFleet, position);
                 beep();
                 this.PrintHit();
+                console.log(cliColor.red("Yeah ! Nice hit !"));
+
+                var isSunk = gameController.CheckIsSunk(enemyShipHit);
+                if (isSunk) {
+                    beep();
+                    console.log();
+                    this.PrintSunk();
+                    console.log(cliColor.blueBright("And you Sunk it!"));
+                }
+            }
+            else {
+                console.log(cliColor.blue("Miss"));
             }
 
-            if(isHit)
-                console.log(cliColor.red("Yeah ! Nice hit !"));
-            else
-                console.log(cliColor.blue("Miss"));
 
             console.log("Press Enter for computer's turn ...");
             readline.question();
@@ -77,8 +88,17 @@ class Battleship {
             console.log();
             console.log(cliColor.yellow(`Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.blue(`miss`))));
             if (isHit) {
+                var myShipHit = gameController.MarkIsHit(this.myFleet, computerPos);
                 beep();
                 this.PrintHit();
+                var isSunk = gameController.CheckIsSunk(myShipHit);
+
+                if (isSunk) {
+                    beep();
+                    console.log();
+                    this.PrintSunk();
+                    console.log(cliColor.blueBright("And they Sunk it!"));
+                }
             }
             console.log();
             console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
@@ -96,6 +116,12 @@ class Battleship {
         console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
         console.log(cliColor.red("                 -\\  \\     /  /-"));
         console.log(cliColor.red("                   \\  \\   /  /"));
+    }
+
+    PrintSunk() {
+        console.log(cliColor.blue("                   |\\"));
+        console.log(cliColor.blue("                   | \\"));
+        console.log(cliColor.blue("_____________....nm\\__\\mn...._______"));
     }
 
     static ParsePosition(input) {
@@ -129,8 +155,7 @@ class Battleship {
             console.log(`Please enter the positions for the ${ship.name} (size: ${ship.size})`);
             for (var i = 1; i < ship.size + 1; i++) {
                 console.log(`Enter position ${i} of ${ship.size} (i.e A3):`);
-                if (i > 1)
-                {
+                if (i > 1) {
                     console.log(`Please make sure it is a adjacent to the previous entry.`);
                 }
                 const position = readline.question();

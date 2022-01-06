@@ -43,6 +43,34 @@ class GameController {
     static isShipValid(ship) {
         return ship.positions.length == ship.size;
     }
+
+    static MarkIsHit(ships, shot) {
+        if (shot == undefined)
+            throw "The shooting position is not defined";
+        if (ships == undefined)
+            throw "No ships defined";
+        var returnvalue = null;
+        ships.forEach(function (ship) {
+            ship.positions.forEach(position => {
+                if (position.row == shot.row && position.column == shot.column){
+                    position.hit = true;
+                    returnvalue = ship;
+                }
+            });
+        });
+        return returnvalue;
+    }
+
+    static CheckIsSunk(ship){
+        if (ship == undefined)
+            throw "No ship defined";
+        
+        var isSunk = ship.positions.every(position => {
+            return position.hit;
+        });
+
+        return isSunk;
+    }
 }
 
 module.exports = GameController;
