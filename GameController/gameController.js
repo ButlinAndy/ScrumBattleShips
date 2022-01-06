@@ -27,6 +27,19 @@ class GameController {
         return returnvalue;
     }
 
+    static VerifyPosition(shot) {
+        console.log(shot)
+        if (shot.column == null || shot.column.key.toUpperCase().substring(0, 1) > 'H') {
+            console.log("Invalid Column")
+            return false;
+        }
+        if (shot.row == null || shot.row == 0 || shot.row > 8) {
+            console.log("Invalid Row")
+            return false;
+        }
+        return true
+    }
+
     static isShipValid(ship) {
         return ship.positions.length == ship.size;
     }
