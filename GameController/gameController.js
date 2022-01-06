@@ -27,8 +27,49 @@ class GameController {
         return returnvalue;
     }
 
+    static VerifyPosition(shot) {
+        console.log(shot)
+        if (shot.column == null || shot.column.key.toUpperCase().substring(0, 1) > 'H') {
+            console.log("Invalid Column")
+            return false;
+        }
+        if (shot.row == null || shot.row == 0 || shot.row > 8) {
+            console.log("Invalid Row")
+            return false;
+        }
+        return true
+    }
+
     static isShipValid(ship) {
         return ship.positions.length == ship.size;
+    }
+
+    static MarkIsHit(ships, shot) {
+        if (shot == undefined)
+            throw "The shooting position is not defined";
+        if (ships == undefined)
+            throw "No ships defined";
+        var returnvalue = null;
+        ships.forEach(function (ship) {
+            ship.positions.forEach(position => {
+                if (position.row == shot.row && position.column == shot.column){
+                    position.hit = true;
+                    returnvalue = ship;
+                }
+            });
+        });
+        return returnvalue;
+    }
+
+    static CheckIsSunk(ship){
+        if (ship == undefined)
+            throw "No ship defined";
+        
+        var isSunk = ship.positions.every(position => {
+            return position.hit;
+        });
+
+        return isSunk;
     }
 }
 
