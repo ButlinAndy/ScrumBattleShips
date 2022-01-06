@@ -29,6 +29,9 @@ class Battleship {
 
     StartGame() {
         console.clear();
+
+        //Battleship.VisualiseShips(this.enemyFleet);
+
         console.log("                  __");
         console.log("                 /  \\");
         console.log("           .-.  |    |");
@@ -47,15 +50,15 @@ class Battleship {
             var position = Battleship.ParsePosition(readline.question());
 
             var validInput = gameController.VerifyPosition(position)
-            if(!validInput) {
+            if (!validInput) {
                 do {
                     console.log("Enter coordinates for your shot :");
                     var position = Battleship.ParsePosition(readline.question());
                     var validInput = gameController.VerifyPosition(position)
                 }
-                while(!validInput)
+                while (!validInput)
             }
-            
+
             var isHit = gameController.CheckIsHit(this.enemyFleet, position);
             if (isHit) {
                 var enemyShipHit = gameController.MarkIsHit(this.enemyFleet, position);
@@ -83,7 +86,7 @@ class Battleship {
             console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
             console.log();
 
-            var computerPos = this.GetRandomPosition();
+            var computerPos = Battleship.GetRandomPosition();
             var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
             console.log();
             console.log(cliColor.yellow(`Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.blue(`miss`))));
@@ -130,7 +133,7 @@ class Battleship {
         return new position(letter, number);
     }
 
-    GetRandomPosition() {
+    static GetRandomPosition() {
         var rows = 8;
         var lines = 8;
         var rndColumn = Math.floor((Math.random() * lines));
@@ -167,27 +170,101 @@ class Battleship {
     InitializeEnemyFleet() {
         this.enemyFleet = gameController.InitializeShips();
 
-        this.enemyFleet[0].addPosition(new position(letters.B, 4));
-        this.enemyFleet[0].addPosition(new position(letters.B, 5));
-        this.enemyFleet[0].addPosition(new position(letters.B, 6));
-        this.enemyFleet[0].addPosition(new position(letters.B, 7));
-        this.enemyFleet[0].addPosition(new position(letters.B, 8));
+        Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[0]);
+        Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[1]);
+        Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[2]);
+        Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[3]);
+        Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[4]);
+        // this.enemyFleet[0].addPosition(new position(letters.B, 4));
+        // this.enemyFleet[0].addPosition(new position(letters.B, 5));
+        // this.enemyFleet[0].addPosition(new position(letters.B, 6));
+        // this.enemyFleet[0].addPosition(new position(letters.B, 7));
+        // this.enemyFleet[0].addPosition(new position(letters.B, 8));
 
-        this.enemyFleet[1].addPosition(new position(letters.E, 6));
-        this.enemyFleet[1].addPosition(new position(letters.E, 7));
-        this.enemyFleet[1].addPosition(new position(letters.E, 8));
-        this.enemyFleet[1].addPosition(new position(letters.E, 9));
+        // this.enemyFleet[1].addPosition(new position(letters.E, 6));
+        // this.enemyFleet[1].addPosition(new position(letters.E, 7));
+        // this.enemyFleet[1].addPosition(new position(letters.E, 8));
+        // this.enemyFleet[1].addPosition(new position(letters.E, 9));
 
-        this.enemyFleet[2].addPosition(new position(letters.A, 3));
-        this.enemyFleet[2].addPosition(new position(letters.B, 3));
-        this.enemyFleet[2].addPosition(new position(letters.C, 3));
+        // this.enemyFleet[2].addPosition(new position(letters.A, 3));
+        // this.enemyFleet[2].addPosition(new position(letters.B, 3));
+        // this.enemyFleet[2].addPosition(new position(letters.C, 3));
 
-        this.enemyFleet[3].addPosition(new position(letters.F, 8));
-        this.enemyFleet[3].addPosition(new position(letters.G, 8));
-        this.enemyFleet[3].addPosition(new position(letters.H, 8));
+        // this.enemyFleet[3].addPosition(new position(letters.F, 8));
+        // this.enemyFleet[3].addPosition(new position(letters.G, 8));
+        // this.enemyFleet[3].addPosition(new position(letters.H, 8));
 
-        this.enemyFleet[4].addPosition(new position(letters.C, 5));
-        this.enemyFleet[4].addPosition(new position(letters.C, 6));
+        // this.enemyFleet[4].addPosition(new position(letters.C, 5));
+        // this.enemyFleet[4].addPosition(new position(letters.C, 6));
+    }
+
+    static RandomisePlaceHorizontally() {
+        var horizontal = Math.round(Math.random());
+        return !!horizontal;
+    }
+
+    static SetRandomisedShipPosition(fleet, ship) {
+        var startPosition = null;
+        var horizontal = null;
+
+        do {
+            horizontal = Battleship.RandomisePlaceHorizontally();
+            startPosition = Battleship.GetRandomPosition();
+        } while (
+            (horizontal && (ship.size + startPosition.column - 1) > 8)
+            || (!horizontal && (ship.size + startPosition.row - 1) > 8)
+            || Battleship.DetectOverlap(fleet, ship, horizontal, startPosition)
+        )
+
+        ship.addPosition(startPosition);
+        for (var i = 1; i < ship.size; i++) {
+            var nextPosition = new position(horizontal ? letters.get(startPosition.column + i) : startPosition.column, horizontal ? startPosition.row : startPosition.row + i);
+            ship.addPosition(nextPosition);
+        }
+
+        return startPosition;
+    }
+
+    static DetectOverlap(fleet, ship, horizontal, position) {
+        return fleet.some(fleetShip => {
+            return fleetShip.positions.some(pos => {
+                for (var i = 0; i < ship.size; i++) {
+                    if (horizontal && pos.column === letters.get(position.column + i) && pos.row === position.row) {
+                        return true;
+                    } else if (!horizontal && pos.column === position.column && pos.row === (position.row + i)) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        });
+    }
+
+    static VisualiseShips(fleet) {
+        function noString(ignored) { return ' '; }
+
+        var board = [
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString],
+            [noString, noString, noString, noString, noString, noString, noString, noString]
+        ];
+
+        fleet.forEach(ship => {
+            ship.positions.forEach(pos => {
+                board[pos.row - 1][pos.column.value - 1] = ship.color;
+            });
+        });
+
+        console.log(cliColor.yellow('    A   B   C   D   E   F   G   H'));
+        board.forEach((row, index, arr) => {
+            console.log('  ---------------------------------');
+            console.log((index + 1), '|', row[0]('x'), '|', row[1]('x'), '|', row[2]('x'), '|', row[3]('x'), '|', row[4]('x'), '|', row[5]('x'), '|', row[6]('x'), '|', row[7]('x'));
+        });
     }
 }
 
