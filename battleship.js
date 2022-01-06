@@ -242,8 +242,9 @@ class Battleship {
         console.log(cliColor.yellow('    A   B   C   D   E   F   G   H'));
         board.forEach((row, index, arr) => {
             console.log('  ---------------------------------');
-            console.log((index + 1), '|', row[0]('x'), '|', row[1]('x'), '|', row[2]('x'), '|', row[3]('x'), '|', row[4]('x'), '|', row[5]('x'), '|', row[6]('x'), '|', row[7]('x'));
+            console.log((index + 1), '|', row[0]('x'), '|', row[1]('x'), '|', row[2]('x'), '|', row[3]('x'), '|', row[4]('x'), '|', row[5]('x'), '|', row[6]('x'), '|', row[7]('x'),'|');
         });
+        console.log('  ---------------------------------');
     }
 }
 
