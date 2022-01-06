@@ -10,3 +10,9 @@ describe('parsePositionTests', function() {
     assert.deepStrictEqual(actual, expected);
   });
 });
+
+describe('messageColourTests', function(){
+    it('should use yellow text for computer messages', function(){
+        var expected = new cliColor.red();
+    })
+})
