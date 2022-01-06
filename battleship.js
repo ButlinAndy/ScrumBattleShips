@@ -138,7 +138,7 @@ class Battleship {
         var lines = 8;
         var rndColumn = Math.floor((Math.random() * lines));
         var letter = letters.get(rndColumn + 1);
-        var number = Math.floor((Math.random() * rows));
+        var number = Math.floor((Math.random() * rows)) + 1;
         var result = new position(letter, number);
         return result;
     }
@@ -175,27 +175,6 @@ class Battleship {
         Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[2]);
         Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[3]);
         Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[4]);
-        // this.enemyFleet[0].addPosition(new position(letters.B, 4));
-        // this.enemyFleet[0].addPosition(new position(letters.B, 5));
-        // this.enemyFleet[0].addPosition(new position(letters.B, 6));
-        // this.enemyFleet[0].addPosition(new position(letters.B, 7));
-        // this.enemyFleet[0].addPosition(new position(letters.B, 8));
-
-        // this.enemyFleet[1].addPosition(new position(letters.E, 6));
-        // this.enemyFleet[1].addPosition(new position(letters.E, 7));
-        // this.enemyFleet[1].addPosition(new position(letters.E, 8));
-        // this.enemyFleet[1].addPosition(new position(letters.E, 9));
-
-        // this.enemyFleet[2].addPosition(new position(letters.A, 3));
-        // this.enemyFleet[2].addPosition(new position(letters.B, 3));
-        // this.enemyFleet[2].addPosition(new position(letters.C, 3));
-
-        // this.enemyFleet[3].addPosition(new position(letters.F, 8));
-        // this.enemyFleet[3].addPosition(new position(letters.G, 8));
-        // this.enemyFleet[3].addPosition(new position(letters.H, 8));
-
-        // this.enemyFleet[4].addPosition(new position(letters.C, 5));
-        // this.enemyFleet[4].addPosition(new position(letters.C, 6));
     }
 
     static RandomisePlaceHorizontally() {
