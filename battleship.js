@@ -46,6 +46,16 @@ class Battleship {
             console.log("Enter coordinates for your shot :");
             var position = Battleship.ParsePosition(readline.question());
 
+            var validInput = gameController.VerifyPosition(position)
+            if(!validInput) {
+                do {
+                    console.log("Enter coordinates for your shot :");
+                    var position = Battleship.ParsePosition(readline.question());
+                    var validInput = gameController.VerifyPosition(position)
+                }
+                while(!validInput)
+            }
+            
             var isHit = gameController.CheckIsHit(this.enemyFleet, position);
             if (isHit) {
                 var enemyShipHit = gameController.MarkIsHit(this.enemyFleet, position);
