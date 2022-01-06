@@ -1,9 +1,11 @@
+# ScrumBattleShips
+![image](https://user-images.githubusercontent.com/10856176/148373650-9976f131-59fd-4d71-825a-3924130bf143.png)
 
 [![Build status](https://dev.azure.com/APS-SD-Stewards/APS-SD/_apis/build/status/proscrumdev.battleship-cpp-CI)](https://dev.azure.com/APS-SD-Stewards/APS-SD/_build/latest?definitionId=22)
 
 # Battleship NodeJs
 
-A simple game of Battleship, written in NodeJs.  
+A simple game of Battleship, written in NodeJs.  - By Team Parma Violet (Paul, Tony, Andrew and Paul)
 
 # Getting started
 
