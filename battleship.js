@@ -204,7 +204,7 @@ class Battleship {
 
                 var isSunk = gameController.CheckIsSunk(enemyShipHit);
                 if (isSunk) {
-                    beep();
+                    
                     console.log();
                     this.PrintSunk();
                     console.log(cliColor.blueBright("And you Sunk it!"));
@@ -232,7 +232,7 @@ class Battleship {
                 var isSunk = gameController.CheckIsSunk(myShipHit);
 
                 if (isSunk) {
-                    beep();
+                    
                     console.log();
                     this.PrintSunk();
                     console.log(cliColor.blueBright("And they Sunk it!"));
