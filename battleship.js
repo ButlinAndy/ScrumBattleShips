@@ -132,7 +132,7 @@ class Battleship {
 
         console.clear();
 
-        //Battleship.VisualiseShips(this.enemyFleet);
+        Battleship.VisualiseShips(this.myFleet);
 
         console.log("                  __");
         console.log("                 /  \\");
@@ -190,7 +190,6 @@ class Battleship {
             }
             else if (isHit) {
                 var enemyShipHit = gameController.MarkIsHit(this.enemyFleet, position);
-                beep();
                 this.PrintHit();
                 console.log(cliColor.red("Yeah ! Nice hit !"));
 
@@ -220,7 +219,6 @@ class Battleship {
             console.log(cliColor.yellow(`Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.blue(`miss`))));
             if (isHit) {
                 var myShipHit = gameController.MarkIsHit(this.myFleet, computerPos);
-                beep();
                 this.PrintHit();
                 var isSunk = gameController.CheckIsSunk(myShipHit);
 
