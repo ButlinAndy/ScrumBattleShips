@@ -144,6 +144,19 @@ class Battleship {
     }
 
     GetNewRandomPosition() {
+        var rows = 8;
+        var columns = 8;
+        var checkForAllPositionsChosen = null;
+        for (var i = 0; i < rows; i++) {
+            for (var j = 0; j < columns; j++) {
+                checkForAllPositionsChosen = this.positionGuesses[i][j] === true;
+                if (checkForAllPositionsChosen === false) break;
+
+            }
+            if (checkForAllPositionsChosen === false) break;
+        }
+        if (checkForAllPositionsChosen) return null;
+
         // would better to randomise from a set list of positions and keep removing them, rather than keep randomly trying to hit unchosen positions
         // but performance is okay enough for now - typically ~250 attempts to get all 64 positions, but have seen from ~80 to >400
         var position = Battleship.GetRandomPosition();

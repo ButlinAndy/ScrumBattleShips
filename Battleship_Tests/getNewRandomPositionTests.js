@@ -30,7 +30,7 @@ describe('getNewRandomPositionTests', function () {
         assert.ok(actual);
     });
 
-    it("should return true if no duplicates are received after checking each position", function () {
+    it("should return true if each position has been checked after calling a number of times equal to the total board size", function () {
         var rows = 8;
         var columns = 8;
 
@@ -43,7 +43,7 @@ describe('getNewRandomPositionTests', function () {
 
         var actual = null;
 
-        // check the tracking array is initialised properly
+        // check the tracking array is full
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 actual = bs.positionGuesses[i][j] === true;
@@ -57,5 +57,35 @@ describe('getNewRandomPositionTests', function () {
         }
 
         assert.ok(actual);
+    });
+
+    it("should return null after calling a number of times greater than the total board size", function () {
+        var rows = 8;
+        var columns = 8;
+
+        var bs = new battleship();
+        bs.InitializeComputerOpponent();
+
+        for (var i = 0; i < ((rows * columns)+1); i++) {
+            var actual = bs.GetNewRandomPosition();
+        }
+
+        var checks = null;
+
+        // check the tracking array is full
+        for (var i = 0; i < rows; i++) {
+            for (var j = 0; j < columns; j++) {
+                checks = bs.positionGuesses[i][j] === true;
+                if (checks === false) {
+                    break;
+                }
+            }
+            if (checks === false) {
+                break;
+            }
+        }
+
+        assert.strictEqual(actual, null);
+        assert.ok(checks);
     });
 });
