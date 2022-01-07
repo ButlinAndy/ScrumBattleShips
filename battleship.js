@@ -5,33 +5,134 @@ const cliColor = require('cli-color');
 const beep = require('beepbeep');
 const position = require("./GameController/position.js");
 const letters = require("./GameController/letters.js");
+const player = require('./node_modules/node-wav-player');
+
+const timer = ms => new Promise(res => setTimeout(res, ms));
 
 class Battleship {
 
     start() {
-        console.log(cliColor.magenta("                                     |__"));
-        console.log(cliColor.magenta("                                     |\\/"));
-        console.log(cliColor.magenta("                                     ---"));
-        console.log(cliColor.magenta("                                     / | ["));
-        console.log(cliColor.magenta("                              !      | |||"));
-        console.log(cliColor.magenta("                            _/|     _/|-++'"));
-        console.log(cliColor.magenta("                        +  +--|    |--|--|_ |-"));
-        console.log(cliColor.magenta("                     { /|__|  |/\\__|  |--- |||__/"));
-        console.log(cliColor.magenta("                    +---------------___[}-_===_.'____                 /\\"));
-        console.log(cliColor.magenta("                ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _"));
-        console.log(cliColor.magenta(" __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7"));
-        console.log(cliColor.magenta("|                        Welcome to Battleship                         BB-61/"));
-        console.log(cliColor.magenta(" \\_________________________________________________________________________|"));
+
+        player.play({
+            path: './Audio/Battleships - 8Bit - 01 Start.wav',
+            loop: true
+        }).then(() => {
+            console.log('The wav file started to be played successfully.');
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        console.clear();
+        console.log(cliColor.magenta("                                                       |__"));
+        console.log(cliColor.magenta("                                                       |\\/"));
+        console.log(cliColor.magenta("                                                       ---"));
+        console.log(cliColor.magenta("                                                       / | ["));
+        console.log(cliColor.magenta("                                                !      | |||"));
+        console.log(cliColor.magenta("                                              _/|     _/|-++'"));
+        console.log(cliColor.magenta("                                          +  +--|    |--|--|_ |-"));
+        console.log(cliColor.magenta("                                       { /|__|  |/\\__|  |--- |||__/"));
+        console.log(cliColor.magenta("                                      +---------------___[}-_===_.'____                 /\\"));
+        console.log(cliColor.magenta("                                  ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _"));
+        console.log(cliColor.magenta("                   __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7"));
+        console.log(cliColor.magenta("                  |                        Welcome to Battleship                         BB-61/"));
+        console.log(cliColor.magenta("                   \\_________________________________________________________________________|"));
+        console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+        console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+        console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
         console.log();
 
-        this.InitializeGame();
-        this.StartGame();
+        timer(1000).then(() => {
+            console.clear();
+            console.log(cliColor.magenta("                                                   |__"));
+            console.log(cliColor.magenta("                                                   |\\/"));
+            console.log(cliColor.magenta("                                                   ---"));
+            console.log(cliColor.magenta("                                                   / | ["));
+            console.log(cliColor.magenta("                                            !      | |||"));
+            console.log(cliColor.magenta("                                          _/|     _/|-++'"));
+            console.log(cliColor.magenta("                                      +  +--|    |--|--|_ |-"));
+            console.log(cliColor.magenta("                                   { /|__|  |/\\__|  |--- |||__/"));
+            console.log(cliColor.magenta("                                  +---------------___[}-_===_.'____                 /\\"));
+            console.log(cliColor.magenta("                              ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _"));
+            console.log(cliColor.magenta("               __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7"));
+            console.log(cliColor.magenta("              |                        Welcome to Battleship                         BB-61/"));
+            console.log(cliColor.magenta("               \\_________________________________________________________________________|"));
+            console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+            console.log();
+            timer(1000).then(() => {
+                console.clear();
+                console.log(cliColor.magenta("                                                |__"));
+                console.log(cliColor.magenta("                                                |\\/"));
+                console.log(cliColor.magenta("                                                ---"));
+                console.log(cliColor.magenta("                                                / | ["));
+                console.log(cliColor.magenta("                                         !      | |||"));
+                console.log(cliColor.magenta("                                       _/|     _/|-++'"));
+                console.log(cliColor.magenta("                                   +  +--|    |--|--|_ |-"));
+                console.log(cliColor.magenta("                                { /|__|  |/\\__|  |--- |||__/"));
+                console.log(cliColor.magenta("                               +---------------___[}-_===_.'____                 /\\"));
+                console.log(cliColor.magenta("                           ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _"));
+                console.log(cliColor.magenta("            __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7"));
+                console.log(cliColor.magenta("           |                        Welcome to Battleship                         BB-61/"));
+                console.log(cliColor.magenta("            \\_________________________________________________________________________|"));
+                console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                console.log();
+
+                timer(1000).then(() => {
+                    console.clear();
+                    console.log(cliColor.magenta("                                              |__"));
+                    console.log(cliColor.magenta("                                              |\\/"));
+                    console.log(cliColor.magenta("                                              ---"));
+                    console.log(cliColor.magenta("                                              / | ["));
+                    console.log(cliColor.magenta("                                       !      | |||"));
+                    console.log(cliColor.magenta("                                     _/|     _/|-++'"));
+                    console.log(cliColor.magenta("                                 +  +--|    |--|--|_ |-"));
+                    console.log(cliColor.magenta("                              { /|__|  |/\\__|  |--- |||__/"));
+                    console.log(cliColor.magenta("                             +---------------___[}-_===_.'____                 /\\"));
+                    console.log(cliColor.magenta("                         ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _"));
+                    console.log(cliColor.magenta("          __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7"));
+                    console.log(cliColor.magenta("         |                        Welcome to Battleship                         BB-61/"));
+                    console.log(cliColor.magenta("          \\_________________________________________________________________________|"));
+                    console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                    console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                    console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                    console.log();
+                    timer(1000).then(() => {
+                        console.clear();
+                        console.log(cliColor.magenta("                                           |__"));
+                        console.log(cliColor.magenta("                                           |\\/"));
+                        console.log(cliColor.magenta("                                           ---"));
+                        console.log(cliColor.magenta("                                           / | ["));
+                        console.log(cliColor.magenta("                                    !      | |||"));
+                        console.log(cliColor.magenta("                                  _/|     _/|-++'"));
+                        console.log(cliColor.magenta("                              +  +--|    |--|--|_ |-"));
+                        console.log(cliColor.magenta("                           { /|__|  |/\\__|  |--- |||__/"));
+                        console.log(cliColor.magenta("                          +---------------___[}-_===_.'____                 /\\"));
+                        console.log(cliColor.magenta("                      ____`-' ||___-{]_| _[}-  |     |_[___\\==--            \\/   _"));
+                        console.log(cliColor.magenta("       __..._____--==/___]_|__|_____________________________[___\\==--____,------' .7"));
+                        console.log(cliColor.magenta("      |                        Welcome to Battleship                         BB-61/"));
+                        console.log(cliColor.magenta("       \\_________________________________________________________________________|"));
+                        console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                        console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                        console.log(cliColor.white("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
+                        console.log();
+                        timer(3000).then(() => {
+                            this.InitializeGame();
+                            this.StartGame();
+                        });
+                    });
+                });
+            });
+        });
     }
 
     StartGame() {
+
         console.clear();
 
-        Battleship.VisualiseShips(this.myFleet);
+        //Battleship.VisualiseShips(this.enemyFleet);
 
         console.log("                  __");
         console.log("                 /  \\");
@@ -129,6 +230,15 @@ class Battleship {
                     this.PrintSunk();
                     console.log(cliColor.blueBright("And they Sunk it!"));
                 }
+
+                player.play({
+                    path: './Audio/Battleships Sting Hit - 01 Start.wav',
+                    loop: false
+                }).then(() => {
+                    console.log('The wav file started to be played successfully.');
+                }).catch((error) => {
+                    console.error(error);
+                });
             }
             console.log();
             console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
@@ -138,6 +248,8 @@ class Battleship {
     }
 
     PrintHit() {
+        for (var i = 0; i < 20; i++) {
+        console.clear();
         console.log(cliColor.red("                \\         .  ./"));
         console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
         console.log(cliColor.red("                  (M^^.^~~:.'\")."));
@@ -146,7 +258,35 @@ class Battleship {
         console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
         console.log(cliColor.red("                 -\\  \\     /  /-"));
         console.log(cliColor.red("                   \\  \\   /  /"));
+        this.SleepWait(100);
+        console.clear();
+        console.log(cliColor.yellow("                \\         .  ./"));
+        console.log(cliColor.yellow("              \\      .:\";'.:..\"   /"));
+        console.log(cliColor.yellow("                  (M^^.^~~:.'\")."));
+        console.log(cliColor.yellow("            -   (/  .    . . \\ \\)  -"));
+        console.log(cliColor.yellow("               ((| :. ~ ^  :. .|))"));
+        console.log(cliColor.yellow("            -   (\\- |  \\ /  |  /)  -"));
+        console.log(cliColor.yellow("                 -\\  \\     /  /-"));
+        console.log(cliColor.yellow("                   \\  \\   /  /"));
+        this.SleepWait(100);
+        console.clear();
+        console.log(cliColor.red("                \\         .  ./"));
+        console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
+        console.log(cliColor.red("                  (M^^.^~~:.'\")."));
+        console.log(cliColor.red("            -   (/  .    . . \\ \\)  -"));
+        console.log(cliColor.red("               ((| :. ~ ^  :. .|))"));
+        console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
+        console.log(cliColor.red("                 -\\  \\     /  /-"));
+        console.log(cliColor.red("                   \\  \\   /  /"));
+        }
     }
+
+    SleepWait(miliseconds) {
+        var currentTime = new Date().getTime();
+     
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+     }
 
     PrintSunk() {
         console.log(cliColor.blue("                   |\\"));
@@ -196,22 +336,7 @@ class Battleship {
         }
     }
 
-    faancy() {
-        var loading = (function () {
-            var h = ['|', '/', '-', '\\'];
-            var i = 0;
-
-            return setInterval(() => {
-                i = (i > 3) ? 0 : i;
-                console.clear();
-                console.log(h[i]);
-                i++;
-            }, 300);
-        })();
-    }
-
     InitializeGame() {
-        this.faancy();
         this.InitializeMyFleet();
         this.InitializeEnemyFleet();
         this.InitializeComputerOpponent();
@@ -317,9 +442,7 @@ class Battleship {
 
         fleet.forEach(ship => {
             ship.positions.forEach(pos => {
-                if (pos && pos.row && pos.column) {
-                    board[pos.row - 1][pos.column.value - 1] = ship.color;
-                }
+                board[pos.row - 1][pos.column.value - 1] = ship.color;
             });
         });
 
