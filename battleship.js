@@ -4,6 +4,7 @@ const cliColor = require('cli-color');
 const beep = require('beepbeep');
 const position = require("./GameController/position.js");
 const letters = require("./GameController/letters.js");
+const player = require('./node_modules/node-wav-player');
 
 class Battleship {
 
@@ -23,14 +24,25 @@ class Battleship {
         console.log(cliColor.magenta(" \\_________________________________________________________________________|"));
         console.log();
 
+        player.play({
+            path: './Audio/Battleships - 8Bit - 01 Start.wav',
+            loop: true
+          }).then(() => {
+            console.log('The wav file started to be played successfully.');
+          }).catch((error) => {
+            console.error(error);
+          });
+
+
         this.InitializeGame();
         this.StartGame();
     }
 
     StartGame() {
+
         console.clear();
 
-        Battleship.VisualiseShips(this.myFleet);
+        //Battleship.VisualiseShips(this.enemyFleet);
 
         console.log("                  __");
         console.log("                 /  \\");
@@ -102,6 +114,15 @@ class Battleship {
                     this.PrintSunk();
                     console.log(cliColor.blueBright("And they Sunk it!"));
                 }
+
+                player.play({
+                    path: './Audio/Battleships Sting Hit - 01 Start.wav',
+                    loop: false
+                  }).then(() => {
+                    console.log('The wav file started to be played successfully.');
+                  }).catch((error) => {
+                    console.error(error);
+                  });
             }
             console.log();
             console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
@@ -168,22 +189,7 @@ class Battleship {
         }
     }
 
-    faancy() {
-        var loading = (function () {
-            var h = ['|', '/', '-', '\\'];
-            var i = 0;
-
-            return setInterval(() => {
-                i = (i > 3) ? 0 : i;
-                console.clear();
-                console.log(h[i]);
-                i++;
-            }, 300);
-        })();
-    }
-
     InitializeGame() {
-        this.faancy();
         this.InitializeMyFleet();
         this.InitializeEnemyFleet();
         this.InitializeComputerOpponent();
@@ -289,9 +295,7 @@ class Battleship {
 
         fleet.forEach(ship => {
             ship.positions.forEach(pos => {
-                if (pos && pos.row && pos.column) {
-                    board[pos.row - 1][pos.column.value - 1] = ship.color;
-                }
+                board[pos.row - 1][pos.column.value - 1] = ship.color;
             });
         });
 
