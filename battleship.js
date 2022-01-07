@@ -132,7 +132,7 @@ class Battleship {
 
         console.clear();
 
-        //Battleship.VisualiseShips(this.enemyFleet);
+        Battleship.VisualiseShips(this.myFleet);
 
         console.log("                  __");
         console.log("                 /  \\");
