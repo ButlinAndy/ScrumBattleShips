@@ -28,7 +28,7 @@ class GameController {
     }
 
     static VerifyPosition(shot) {
-        console.log(shot)
+        //console.log(shot)
         if (shot.column == null || shot.column.key.toUpperCase().substring(0, 1) > 'H') {
             console.log("Invalid Column")
             return false;
