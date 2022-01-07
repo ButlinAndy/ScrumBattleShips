@@ -190,6 +190,15 @@ class Battleship {
             }
             else if (isHit) {
                 var enemyShipHit = gameController.MarkIsHit(this.enemyFleet, position);
+
+                player.play({
+                    path: './Audio/Cannon Shot - 01 Start.wav'
+                }).then(() => {
+                    console.log('The wav file started to be played successfully.');
+                }).catch((error) => {
+                    console.error(error);
+                });
+
                 this.PrintHit();
                 console.log(cliColor.red("Yeah ! Nice hit !"));
 
