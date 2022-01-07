@@ -259,7 +259,7 @@ class Battleship {
         player.play({
             path: './Audio/Cannon Shot - 01 Start.wav'
         }).then(() => {
-            console.log('The wav file started to be played successfully.');
+            console.log('BOOM!!');
         }).catch((error) => {
             console.error(error);
         });
