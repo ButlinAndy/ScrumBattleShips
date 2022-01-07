@@ -139,6 +139,8 @@ class Battleship {
     }
 
     PrintHit() {
+        for (var i = 0; i < 20; i++) {
+        console.clear();
         console.log(cliColor.red("                \\         .  ./"));
         console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
         console.log(cliColor.red("                  (M^^.^~~:.'\")."));
@@ -147,7 +149,35 @@ class Battleship {
         console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
         console.log(cliColor.red("                 -\\  \\     /  /-"));
         console.log(cliColor.red("                   \\  \\   /  /"));
+        this.SleepWait(100);
+        console.clear();
+        console.log(cliColor.yellow("                \\         .  ./"));
+        console.log(cliColor.yellow("              \\      .:\";'.:..\"   /"));
+        console.log(cliColor.yellow("                  (M^^.^~~:.'\")."));
+        console.log(cliColor.yellow("            -   (/  .    . . \\ \\)  -"));
+        console.log(cliColor.yellow("               ((| :. ~ ^  :. .|))"));
+        console.log(cliColor.yellow("            -   (\\- |  \\ /  |  /)  -"));
+        console.log(cliColor.yellow("                 -\\  \\     /  /-"));
+        console.log(cliColor.yellow("                   \\  \\   /  /"));
+        this.SleepWait(100);
+        console.clear();
+        console.log(cliColor.red("                \\         .  ./"));
+        console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
+        console.log(cliColor.red("                  (M^^.^~~:.'\")."));
+        console.log(cliColor.red("            -   (/  .    . . \\ \\)  -"));
+        console.log(cliColor.red("               ((| :. ~ ^  :. .|))"));
+        console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
+        console.log(cliColor.red("                 -\\  \\     /  /-"));
+        console.log(cliColor.red("                   \\  \\   /  /"));
+        }
     }
+
+    SleepWait(miliseconds) {
+        var currentTime = new Date().getTime();
+     
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+     }
 
     PrintSunk() {
         console.log(cliColor.blue("                   |\\"));
