@@ -1,5 +1,6 @@
 const readline = require('readline-sync');
 const gameController = require("./GameController/gameController.js");
+const messageController = require("./GameController/messageController.js");
 const cliColor = require('cli-color');
 const beep = require('beepbeep');
 const position = require("./GameController/position.js");
@@ -48,7 +49,7 @@ class Battleship {
             console.log("Player, it's your turn");
             console.log("Enter coordinates for your shot :");
             var position = Battleship.ParsePosition(readline.question());
-
+            console.log(position)
             var validInput = gameController.VerifyPosition(position)
             if (!validInput) {
                 do {
@@ -60,7 +61,34 @@ class Battleship {
             }
 
             var isHit = gameController.CheckIsHit(this.enemyFleet, position);
-            if (isHit) {
+            if (isHit && validInput && position.column == 'Z' && position.row == '99') {
+                console.log(cliColor.red("☢    ☢    ☢    ☢    ☢    ☢"))
+                console.log()
+                console.log(cliColor.red("Please Enter Nuclear Launch Code"))
+                console.log()
+                console.log(cliColor.red("☢    ☢    ☢    ☢    ☢    ☢"))
+                console.log()
+                var launch = readline.question();
+                if (launch = '8080') {
+                    console.log(cliColor.redBright("     _.-^^---....,,--       "))
+                    console.log(cliColor.redBright(" _--                  --_  "))
+                    console.log(cliColor.redBright("<                        >)"))
+                    console.log(cliColor.redBright("|                         | "))
+                    console.log(cliColor.redBright(" \._                   _./  "))
+                    console.log(cliColor.redBright("    ```--. . , ; .--'''       "))
+                    console.log(cliColor.redBright("          | |   |             "))
+                    console.log(cliColor.redBright("       .-=||  | |=-.   "))
+                    console.log(cliColor.redBright("       `-=#$%&%$#=-'   "))
+                    console.log(cliColor.redBright("          | ;  :|     "))
+                    console.log(cliColor.redBright(" _____.,-#%&$@%#&#~,._____"))
+                    console.log();
+                    messageController.gameOverMessage(true);
+                }
+                else {
+                    console.log(cliColor.blue("Launch Aborted"));
+                }
+            }
+            else if (isHit) {
                 var enemyShipHit = gameController.MarkIsHit(this.enemyFleet, position);
                 beep();
                 this.PrintHit();
@@ -128,6 +156,7 @@ class Battleship {
     }
 
     static ParsePosition(input) {
+        if (input == 'Z99') return new position('Z', 99);
         var letter = letters.get(input.toUpperCase().substring(0, 1));
         var number = parseInt(input.substring(1, 2), 10);
         return new position(letter, number);
