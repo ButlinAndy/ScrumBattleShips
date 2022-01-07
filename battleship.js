@@ -168,7 +168,22 @@ class Battleship {
         }
     }
 
+    faancy() {
+        var loading = (function () {
+            var h = ['|', '/', '-', '\\'];
+            var i = 0;
+
+            return setInterval(() => {
+                i = (i > 3) ? 0 : i;
+                console.clear();
+                console.log(h[i]);
+                i++;
+            }, 300);
+        })();
+    }
+
     InitializeGame() {
+        this.faancy();
         this.InitializeMyFleet();
         this.InitializeEnemyFleet();
         this.InitializeComputerOpponent();
@@ -274,7 +289,9 @@ class Battleship {
 
         fleet.forEach(ship => {
             ship.positions.forEach(pos => {
-                board[pos.row - 1][pos.column.value - 1] = ship.color;
+                if (pos && pos.row && pos.column) {
+                    board[pos.row - 1][pos.column.value - 1] = ship.color;
+                }
             });
         });
 
