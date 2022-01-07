@@ -17,7 +17,7 @@ class Battleship {
             path: './Audio/Battleships - 8Bit - 01 Start.wav',
             loop: true
         }).then(() => {
-            console.log('The wav file started to be played successfully.');
+            console.log('Enjoy the soundtrack!!');
         }).catch((error) => {
             console.error(error);
         });
@@ -247,44 +247,44 @@ class Battleship {
 
     PrintHit() {
         for (var i = 0; i < 20; i++) {
-        console.clear();
-        console.log(cliColor.red("                \\         .  ./"));
-        console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
-        console.log(cliColor.red("                  (M^^.^~~:.'\")."));
-        console.log(cliColor.red("            -   (/  .    . . \\ \\)  -"));
-        console.log(cliColor.red("               ((| :. ~ ^  :. .|))"));
-        console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
-        console.log(cliColor.red("                 -\\  \\     /  /-"));
-        console.log(cliColor.red("                   \\  \\   /  /"));
-        this.SleepWait(100);
-        console.clear();
-        console.log(cliColor.yellow("                \\         .  ./"));
-        console.log(cliColor.yellow("              \\      .:\";'.:..\"   /"));
-        console.log(cliColor.yellow("                  (M^^.^~~:.'\")."));
-        console.log(cliColor.yellow("            -   (/  .    . . \\ \\)  -"));
-        console.log(cliColor.yellow("               ((| :. ~ ^  :. .|))"));
-        console.log(cliColor.yellow("            -   (\\- |  \\ /  |  /)  -"));
-        console.log(cliColor.yellow("                 -\\  \\     /  /-"));
-        console.log(cliColor.yellow("                   \\  \\   /  /"));
-        this.SleepWait(100);
-        console.clear();
-        console.log(cliColor.red("                \\         .  ./"));
-        console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
-        console.log(cliColor.red("                  (M^^.^~~:.'\")."));
-        console.log(cliColor.red("            -   (/  .    . . \\ \\)  -"));
-        console.log(cliColor.red("               ((| :. ~ ^  :. .|))"));
-        console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
-        console.log(cliColor.red("                 -\\  \\     /  /-"));
-        console.log(cliColor.red("                   \\  \\   /  /"));
+            console.clear();
+            console.log(cliColor.red("                \\         .  ./"));
+            console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
+            console.log(cliColor.red("                  (M^^.^~~:.'\")."));
+            console.log(cliColor.red("            -   (/  .    . . \\ \\)  -"));
+            console.log(cliColor.red("               ((| :. ~ ^  :. .|))"));
+            console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
+            console.log(cliColor.red("                 -\\  \\     /  /-"));
+            console.log(cliColor.red("                   \\  \\   /  /"));
+            this.SleepWait(100);
+            console.clear();
+            console.log(cliColor.yellow("                \\         .  ./"));
+            console.log(cliColor.yellow("              \\      .:\";'.:..\"   /"));
+            console.log(cliColor.yellow("                  (M^^.^~~:.'\")."));
+            console.log(cliColor.yellow("            -   (/  .    . . \\ \\)  -"));
+            console.log(cliColor.yellow("               ((| :. ~ ^  :. .|))"));
+            console.log(cliColor.yellow("            -   (\\- |  \\ /  |  /)  -"));
+            console.log(cliColor.yellow("                 -\\  \\     /  /-"));
+            console.log(cliColor.yellow("                   \\  \\   /  /"));
+            this.SleepWait(100);
+            console.clear();
+            console.log(cliColor.red("                \\         .  ./"));
+            console.log(cliColor.red("              \\      .:\";'.:..\"   /"));
+            console.log(cliColor.red("                  (M^^.^~~:.'\")."));
+            console.log(cliColor.red("            -   (/  .    . . \\ \\)  -"));
+            console.log(cliColor.red("               ((| :. ~ ^  :. .|))"));
+            console.log(cliColor.red("            -   (\\- |  \\ /  |  /)  -"));
+            console.log(cliColor.red("                 -\\  \\     /  /-"));
+            console.log(cliColor.red("                   \\  \\   /  /"));
         }
     }
 
     SleepWait(miliseconds) {
         var currentTime = new Date().getTime();
-     
+
         while (currentTime + miliseconds >= new Date().getTime()) {
         }
-     }
+    }
 
     PrintSunk() {
         console.log(cliColor.blue("                   |\\"));
@@ -440,7 +440,9 @@ class Battleship {
 
         fleet.forEach(ship => {
             ship.positions.forEach(pos => {
-                board[pos.row - 1][pos.column.value - 1] = ship.color;
+                if (pos && pos.row && pos.column) {
+                    board[pos.row - 1][pos.column.value - 1] = ship.color;
+                }
             });
         });
 
