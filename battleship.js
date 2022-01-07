@@ -86,7 +86,7 @@ class Battleship {
             console.log(cliColor.blue("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
             console.log();
 
-            var computerPos = Battleship.GetRandomPosition();
+            var computerPos = this.GetNewRandomPosition();
             var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
             console.log();
             console.log(cliColor.yellow(`Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.blue(`miss`))));
@@ -143,9 +143,22 @@ class Battleship {
         return result;
     }
 
+    GetNewRandomPosition() {
+        // would better to randomise from a set list of positions and keep removing them, rather than keep randomly trying to hit unchosen positions
+        // but performance is okay enough for now - typically ~250 attempts to get all 64 positions, but have seen from ~80 to >400
+        var position = Battleship.GetRandomPosition();
+        if (this.positionGuesses[position.row - 1][position.column.value - 1]) {
+            return this.GetNewRandomPosition();
+        } else {
+            this.positionGuesses[position.row - 1][position.column.value - 1] = true;
+            return position;
+        }
+    }
+
     InitializeGame() {
         this.InitializeMyFleet();
         this.InitializeEnemyFleet();
+        this.InitializeComputerOpponent();
     }
 
     InitializeMyFleet() {
@@ -175,6 +188,19 @@ class Battleship {
         Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[2]);
         Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[3]);
         Battleship.SetRandomisedShipPosition(this.enemyFleet, this.enemyFleet[4]);
+    }
+
+    InitializeComputerOpponent() {
+        var rows = 8;
+        var columns = 8;
+        this.positionGuesses = [];
+        for (var i = 0; i < rows; i++) {
+            var row = [];
+            for (var j = 0; j < columns; j++) {
+                row.push(false);
+            }
+            this.positionGuesses.push(row);
+        }
     }
 
     static RandomisePlaceHorizontally() {
@@ -242,7 +268,7 @@ class Battleship {
         console.log(cliColor.yellow('    A   B   C   D   E   F   G   H'));
         board.forEach((row, index, arr) => {
             console.log('  ---------------------------------');
-            console.log((index + 1), '|', row[0]('x'), '|', row[1]('x'), '|', row[2]('x'), '|', row[3]('x'), '|', row[4]('x'), '|', row[5]('x'), '|', row[6]('x'), '|', row[7]('x'),'|');
+            console.log((index + 1), '|', row[0]('x'), '|', row[1]('x'), '|', row[2]('x'), '|', row[3]('x'), '|', row[4]('x'), '|', row[5]('x'), '|', row[6]('x'), '|', row[7]('x'), '|');
         });
         console.log('  ---------------------------------');
     }
