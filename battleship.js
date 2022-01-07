@@ -49,7 +49,6 @@ class Battleship {
             console.log("Player, it's your turn");
             console.log("Enter coordinates for your shot :");
             var position = Battleship.ParsePosition(readline.question());
-            console.log(position)
             var validInput = gameController.VerifyPosition(position)
             if (!validInput) {
                 do {
@@ -69,7 +68,7 @@ class Battleship {
                 console.log(cliColor.red("☢    ☢    ☢    ☢    ☢    ☢"))
                 console.log()
                 var launch = readline.question();
-                if (launch = '8080') {
+                if (launch == '8080') {
                     console.log(cliColor.redBright("     _.-^^---....,,--       "))
                     console.log(cliColor.redBright(" _--                  --_  "))
                     console.log(cliColor.redBright("<                        >)"))

@@ -48,4 +48,17 @@ describe('checkIsHitTests', function () {
       }
     )
   });
+
+  it('should return true if nuclear option entered', function() {
+    var ships = gameController.InitializeShips();
+    counter = 1;
+    ships.forEach(ship => {
+      for (var i = 1; i <= ship.size; i++) {
+        ship.addPosition(new position(letters.get(counter), i))
+      }
+      counter++;
+    })
+    var actual = gameController.CheckIsHit(ships, new position('Z', 99));
+    assert.ok(actual);
+  })
 });
