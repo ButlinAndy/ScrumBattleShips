@@ -53,3 +53,5 @@ class messageController{
         }
     }
 }
+
+module.exports = messageController;

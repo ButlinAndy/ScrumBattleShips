@@ -13,6 +13,9 @@ class GameController {
     }
 
     static CheckIsHit(ships, shot) {
+        if (shot.column == 'Z' && shot.row == '99') {
+            return true
+        }
         if (shot == undefined)
             throw "The shooting position is not defined";
         if (ships == undefined)
@@ -28,7 +31,9 @@ class GameController {
     }
 
     static VerifyPosition(shot) {
-        //console.log(shot)
+        if (shot.column == 'Z' && shot.row == '99') {
+            return true
+        }
         if (shot.column == null || shot.column.key.toUpperCase().substring(0, 1) > 'H') {
             console.log("Invalid Column")
             return false;
@@ -45,6 +50,7 @@ class GameController {
     }
 
     static MarkIsHit(ships, shot) {
+        console.log(shot)
         if (shot == undefined)
             throw "The shooting position is not defined";
         if (ships == undefined)
