@@ -255,6 +255,15 @@ class Battleship {
     }
 
     PrintHit() {
+
+        player.play({
+            path: './Audio/Cannon Shot - 01 Start.wav'
+        }).then(() => {
+            console.log('The wav file started to be played successfully.');
+        }).catch((error) => {
+            console.error(error);
+        });
+        
         for (var i = 0; i < 20; i++) {
             console.clear();
             console.log(cliColor.red("                \\         .  ./"));
